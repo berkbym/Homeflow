@@ -1,11 +1,18 @@
 import { FaBookmark } from 'react-icons/fa';
+import PlaceHolderImg from './assets/placeholder-house.webp';
 
 function PropertyCard({ property }) {
   return (
     <div className="border-2 bg-gray-50">
       <div className="relative">
-        <img src={`https://mr0.homeflow.co.uk/${property.photos[0]}`} alt={property.display_address} />
-
+        {/* Added a conditional rendering rule for image. */}
+        {
+          property.photos[0] ? (
+            <img src={`https://mr0.homeflow.co.uk/${property.photos[0]}`} alt={property.display_address} />
+          ) : (
+            <img src={PlaceHolderImg} alt='' />
+          )
+        }
         <button className="absolute top-0 right-2" title="Click to bookmark this property">
           <FaBookmark className="text-yellow-400" size="40" />
         </button>

@@ -34,7 +34,11 @@ function App() {
       <div className="container mx-auto my-5">
         <Header />
         <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {!!filteredProperties && filteredProperties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
+          {!!filteredProperties && filteredProperties.map((property) => 
+            <PropertyCard 
+              key={property.property_id} 
+              property={property} 
+            />)}
         </div>
       </div>
     </PropertyContext.Provider>
