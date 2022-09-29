@@ -8,6 +8,9 @@ export const PropertyContext = React.createContext();
 function App() {
   const [properties, setProperties] = useState([]);
 
+  // use this state to keep track of the user's saved/bookmarked properties
+  const [savedProperties, setSavedProperties] = useState([]);
+
   // use this state to filter properties object by description
   const [filter, setFilter] = useState('');
 
@@ -15,8 +18,14 @@ function App() {
     return property.short_description.includes(filter)
   });
 
-  // use this state to keep track of the user's saved/bookmarked properties
-  const [savedProperties, setSavedProperties] = useState([]);
+  /**
+   * @description Adds a new property to the savedProperties list.
+   * @param {*} property 
+   */
+  function addSaved(property) {
+    const newSaved = [...savedProperties, property]
+    setSavedProperties(newSaved)
+  }
 
   useEffect(() => {
     const fetchPropertyData = async () => {
@@ -36,8 +45,10 @@ function App() {
         <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!!filteredProperties && filteredProperties.map((property) => 
             <PropertyCard 
-              key={property.property_id} 
-              property={property} 
+              key = {property.property_id} 
+              property = {property} 
+              savedProperties = {savedProperties}
+              addSaved = {addSaved}
             />)}
         </div>
       </div>
