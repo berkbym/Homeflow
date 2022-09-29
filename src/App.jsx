@@ -55,8 +55,18 @@ function App() {
       <div className="container mx-auto my-5">
         <Header />
         <div className='flex justify-around'>
-          <button onClick={() => setDisplay('all')} >All Properties</button>
-          <button onClick={() => setDisplay('saved')} >Saved Properties</button>
+          <button 
+            onClick={() => setDisplay('all')}
+            className={display === 'all' ? ('text-xl bg-red-300 my-5 rounded-xl w-1/4 text-white') : ('text-xl w-1/4')}
+          >
+            All Properties
+          </button>
+          <button 
+            onClick={() => setDisplay('saved')}
+            className={display === 'saved' ? ('text-xl bg-red-300 my-5 rounded-xl w-1/4 text-white') : ('text-xl w-1/4')}
+          >
+            Saved Properties
+          </button>
         </div>
         <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {
