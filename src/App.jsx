@@ -1,9 +1,18 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from './Header';
 import PropertyCard from './PropertyCard';
 
+export const PropertyContext = React.createContext();
+
 function App() {
-  const [properties, setProperties] = useState();
+  const [properties, setProperties] = useState([]);
+
+  const [filter, setFilter] = useState('');
+
+  const filteredProperties = properties.filter(property => {
+    return property.short_description.includes(filter)
+  });
 
   // use this state to keep track of the user's saved/bookmarked properties
   const [savedProperties, setSavedProperties] = useState([]);
@@ -20,13 +29,15 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto my-5">
-      <Header />
+    <PropertyContext.Provider value={{setFilter}}>
+      <div className="container mx-auto my-5">
+        <Header />
 
-      <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {!!properties && properties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
+        <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {!!filteredProperties && filteredProperties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
+        </div>
       </div>
-    </div>
+    </PropertyContext.Provider>
   );
 }
 
