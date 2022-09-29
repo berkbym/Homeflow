@@ -14,6 +14,9 @@ function App() {
   // use this state to filter properties object by description
   const [filter, setFilter] = useState('');
 
+  // use this state to set rule to display all properties or saved properties
+  const [display, setDisplay] = useState('all')
+
   const filteredProperties = properties.filter(property => {
     return property.short_description.includes(filter)
   });
@@ -51,6 +54,10 @@ function App() {
     <PropertyContext.Provider value={{setFilter}}>
       <div className="container mx-auto my-5">
         <Header />
+        <div className='flex justify-around'>
+          <button>All Properties</button>
+          <button>Saved Properties</button>
+        </div>
         <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!!filteredProperties && filteredProperties.map((property) => 
             <PropertyCard 
