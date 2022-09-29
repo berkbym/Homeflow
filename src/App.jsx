@@ -27,6 +27,15 @@ function App() {
     setSavedProperties(newSaved)
   }
 
+  /**
+   * @desciption Removes the property from savedProperties list.
+   * @param {*} property 
+   */
+  function removeSaved(property) {
+    const newSaved = savedProperties.filter(element => element !== property)
+    setSavedProperties(newSaved)
+  }
+
   useEffect(() => {
     const fetchPropertyData = async () => {
       const response = await fetch('/property-data.json');
@@ -49,6 +58,7 @@ function App() {
               property = {property} 
               savedProperties = {savedProperties}
               addSaved = {addSaved}
+              removeSaved = {removeSaved}
             />)}
         </div>
       </div>
