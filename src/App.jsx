@@ -55,18 +55,38 @@ function App() {
       <div className="container mx-auto my-5">
         <Header />
         <div className='flex justify-around'>
-          <button>All Properties</button>
-          <button>Saved Properties</button>
+          <button onClick={() => setDisplay('all')} >All Properties</button>
+          <button onClick={() => setDisplay('saved')} >Saved Properties</button>
         </div>
         <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {!!filteredProperties && filteredProperties.map((property) => 
-            <PropertyCard 
-              key = {property.property_id} 
-              property = {property} 
-              savedProperties = {savedProperties}
-              addSaved = {addSaved}
-              removeSaved = {removeSaved}
-            />)}
+          {
+            display === 'all' ? (
+              <>
+                {!!filteredProperties && filteredProperties.map((property) => 
+                  <PropertyCard 
+                    key = {property.property_id} 
+                    property = {property} 
+                    savedProperties = {savedProperties}
+                    addSaved = {addSaved}
+                    removeSaved = {removeSaved}
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                {!!savedProperties && savedProperties.map((property) => 
+                  <PropertyCard 
+                    key = {property.property_id} 
+                    property = {property} 
+                    savedProperties = {savedProperties}
+                    addSaved = {addSaved}
+                    removeSaved = {removeSaved}
+                  />
+                )}
+              </>
+            )
+          }
+
         </div>
       </div>
     </PropertyContext.Provider>
